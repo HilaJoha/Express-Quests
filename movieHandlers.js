@@ -4,7 +4,7 @@ const movies = [
     title: "Citizen Kane",
     director: "Orson Wells",
     year: "1941",
-    colors: false,
+    color: false,
     duration: 120,
   },
   {
@@ -12,7 +12,7 @@ const movies = [
     title: "The Godfather",
     director: "Francis Ford Coppola",
     year: "1972",
-    colors: true,
+    color: true,
     duration: 180,
   },
   {
@@ -81,8 +81,27 @@ const postMovie = (req, res) => {
     });
 };
 
+const putMovie = (req, res) => {
+  const { title, director, year, color, duration } = req.body;
+  const id = parseInt(req.params.id);
+
+  database
+    .query(
+      "UPDATE movies SET title = ?, director = ?, year = ?, color = ?, duration = ? WHERE id = ?",
+      [title, director, year, color, duration, id]
+    )
+    .then(() => {
+      res.sendStatus(200);
+    })
+    .catch((err) => {
+      console.error(err);
+      res.status(500).send("Error updating the user");
+    });
+};
+
 module.exports = {
   getMovies,
   getMovieById,
   postMovie,
+  putMovie,
 };
