@@ -47,8 +47,27 @@ const postUser = (req, res) => {
     });
 };
 
+const putUser = (req, res) => {
+  const { firstname, lastname, email, city, language } = req.body;
+  const id = parseInt(req.params.id);
+
+  database
+    .query(
+      "UPDATE users SET firstname = ?, lastname = ?, email = ?, city = ?, language = ? WHERE id = ?",
+      [firstname, lastname, email, city, language, id]
+    )
+    .then(() => {
+      res.sendStatus(200);
+    })
+    .catch((err) => {
+      console.error(err);
+      res.status(500).send("Error updating the user");
+    });
+};
+
 module.exports = {
   getUsers,
   getUsersById,
   postUser,
+  putUser,
 };
