@@ -81,7 +81,7 @@ const postMovie = (req, res) => {
     });
 };
 
-const putMovie = (req, res) => {
+const updateMovie = (req, res) => {
   const { title, director, year, color, duration } = req.body;
   const id = parseInt(req.params.id);
 
@@ -122,6 +122,6 @@ module.exports = {
   getMovies,
   getMovieById,
   postMovie,
-  putMovie,
+  updateMovie,
   deleteMovie,
 };
