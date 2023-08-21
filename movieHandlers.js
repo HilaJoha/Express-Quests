@@ -118,12 +118,10 @@ const deleteMovie = (req, res) => {
     });
 };
 
-
-
 module.exports = {
   getMovies,
   getMovieById,
   postMovie,
   putMovie,
-  deleteMovie
+  deleteMovie,
 };
